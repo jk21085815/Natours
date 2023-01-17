@@ -2,7 +2,7 @@ const stripe = require('stripe')(process.env.STRIP_SECRET_KEY);
 const AppError = require('../utils/appErr');
 const User =require('./../models/userModel')
 const Tour = require('./../models/tourModel');
-const booking = require('./../models/bookingModel')
+const Booking = require('./../models/bookingModel')
 const catchAsync = require('./../utils/catchAsync');
 const factory = require('./handelerFactory');
 
@@ -59,7 +59,7 @@ const createBookingCheckout = async session => {
     const tour = session.client_reference_id;
     const user = (await User.findOne({ email: session.customer_email })).id;
     const price = session.object.amount_total / 100;
-    await booking.create({ tour, user, price });
+    await Booking.create({ tour, user, price });
   };
 
 exports.webhookCheckout = (req, res, next) => {
