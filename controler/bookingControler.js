@@ -22,7 +22,7 @@ exports.getChekOutSession =catchAsync( async(req, res, next) => {
         customer_email: req.User.email,
         client_reference_id: req.params.tourId,
         //product information
-        line_items:[
+        display_items:[
             {
                 quantity:1,
                 price_data:{
