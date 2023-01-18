@@ -69,14 +69,14 @@ exports.webhookCheckout = (req, res, next) => {
         event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIP_SECRET);
     } catch (err) {
             res.status(400).send(`Webhook Error: ${err.message}`);
-            return;
+            next();
     }
 
-    if(event.type === checkout.session.completed){
+    if(event.type === payment_intent.succeeded){
         console.log(event.data.object);
         const session = event.data.object;
         createBookingCheckout(session);   
-        res.status(200).json({success: true});
+        res.status(200).json({'success': true});
     }else{
         console.log(`Unhandled event type ${event.type}`);
     }
