@@ -1,5 +1,5 @@
 const stripe = require('stripe')(process.env.STRIP_SECRET_KEY);
-const AppError = require('../utils/appErr');
+// const AppError = require('../utils/appErr');
 const User =require('./../models/userModel')
 const Tour = require('./../models/tourModel');
 const Booking = require('./../models/bookingModel')
@@ -26,7 +26,7 @@ exports.getChekOutSession =catchAsync( async(req, res, next) => {
             {
                 quantity:1,
                 price_data:{
-                    unit_amount:tour.price * 100,
+                    unit_amount:tour.price,
                     currency: 'usd',
                     product_data:{
                         name: `${tour.name} Tour`,
@@ -58,7 +58,7 @@ exports.getChekOutSession =catchAsync( async(req, res, next) => {
 const createBookingCheckout = async session => {
     const tour = session.client_reference_id;
     const user = (await User.findOne({ email: session.customer_email })).id;
-    const price = session.display_items[0].price_data.unit_amount / 100;
+    const price = session.display_items[0].price_data.unit_amount;
     await Booking.create({ tour, user, price });
   };
 
