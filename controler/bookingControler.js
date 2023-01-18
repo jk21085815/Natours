@@ -73,13 +73,15 @@ exports.webhookCheckout = (req, res, next) => {
     }
 
     if(event.type === payment_intent.succeeded){
-        console.log(event.data.object);
-        const session = event.data.object;
-        createBookingCheckout(session);   
-        res.status(200).json({'success': true});
+        // console.log(event.data.object);
+        // const session = event.data.object;
+        // createBookingCheckout(session); 
+        const b = x  
     }else{
         console.log(`Unhandled event type ${event.type}`);
     }
+  res.status(200).json({ received: true });
+
 }
 exports.createBooking = factory.createOne(Booking);
 exports.getBooking = factory.getOne(Booking);
