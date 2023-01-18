@@ -63,10 +63,10 @@ const createBookingCheckout = async session => {
   };
 
 exports.webhookCheckout = (req, res, next) => {
-    const sig = request.headers['stripe-signature'];
+    const sig = req.headers['stripe-signature'];
     let event
     try{
-        event = stripe.webhooks.constructEvent(request.body, sig, process.env.STRIP_SECRET);
+        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIP_SECRET);
     } catch (err) {
             response.status(400).send(`Webhook Error: ${err.message}`);
             return;
@@ -74,8 +74,9 @@ exports.webhookCheckout = (req, res, next) => {
 
     if(event.type === checkout.session.completed){
         console.log(event.data.object);
-        const session = event.data.object;
-        createBookingCheckout(session);   
+        // const session = event.data.object;
+        // createBookingCheckout(session);   
+        res.json(event.data.object);
     }else{
         console.log(`Unhandled event type ${event.type}`);
     }
