@@ -18,7 +18,7 @@ export const bookTour = async tourId => {
         //     sessionId: session.data.session.id
         // })
         // console.log(session)
-        window.location.replace(session.data.session.url);
+        // window.location.replace(session.data.session.url);
         console.log(res.body)
     }catch(err){
         showAlert('error', err);
