@@ -32,7 +32,7 @@ exports.getChekOutSession =catchAsync( async(req, res, next) => {
                         name: `${tour.name} Tour`,
                         description: tour.summary,
                         images: [
-                            `${req.protocol}://${req.get('host')}/img/tours/${tour.imageCover}`
+                            `https://easy-plum-abalone-suit.cyclic.app/img/tours/${tour.imageCover}`
                         ],
     
                     },
