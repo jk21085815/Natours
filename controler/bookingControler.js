@@ -22,11 +22,11 @@ exports.getChekOutSession =catchAsync( async(req, res, next) => {
         customer_email: req.User.email,
         client_reference_id: req.params.tourId,
         //product information
-        display_items:[
+        line_items:[
             {
                 quantity:1,
                 price_data:{
-                    unit_amount:tour.price,
+                    unit_amount:tour.price * 100,
                     currency: 'usd',
                     product_data:{
                         name: `${tour.name} Tour`,
@@ -58,7 +58,7 @@ exports.getChekOutSession =catchAsync( async(req, res, next) => {
 const createBookingCheckout = async session => {
     const tour = session.client_reference_id;
     const user = (await User.findOne({ email: session.customer_email })).id;
-    const price = session.display_items[0].price_data.unit_amount;
+    const price = session.line_items[0].price_data.unit_amount;
     await Booking.create({ tour, user, price });
   };
 
@@ -80,8 +80,8 @@ exports.webhookCheckout = (req, res, next) => {
         console.log(`Unhandled event type ${event.type}`);
     }
 }
-exports.createBooking = factory.createOne(booking);
-exports.getBooking = factory.getOne(booking);
-exports.getAllBooking = factory.getAll(booking);
-exports.updateBooking = factory.updateOne(booking);
-exports.deleteBooking = factory.deleteOne(booking);
+exports.createBooking = factory.createOne(Booking);
+exports.getBooking = factory.getOne(Booking);
+exports.getAllBooking = factory.getAll(Booking);
+exports.updateBooking = factory.updateOne(Booking);
+exports.deleteBooking = factory.deleteOne(Booking);
