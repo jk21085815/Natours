@@ -76,7 +76,7 @@ exports.webhookCheckout = (req, res, next) => {
         console.log(event.data.object);
         const session = event.data.object;
         createBookingCheckout(session);   
-        res.status(200).send('success');
+        res.status(200).json({success: true});
     }else{
         console.log(`Unhandled event type ${event.type}`);
     }
