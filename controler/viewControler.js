@@ -38,6 +38,12 @@ exports.logIn = (req, res, next)=>{
     })
 }
 
+exports.forgotPassword = (req, res, next)=>{
+    res.status(200).render('pass',{
+        title: 'Forgot Password'
+    })
+}
+
 exports.singUp = (req, res, next)=>{
     res.status(200).render('singup',{
         title: 'singUp into your account'

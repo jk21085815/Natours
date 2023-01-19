@@ -3,6 +3,7 @@ import { singUp } from "./singup";
 import { logout } from "./logout";
 import { updateSettings } from "./updateSettings";
 import { bookTour } from "./stripe";
+import { forgotPass } from "./forgotpass";
 import '@babel/polyfill';
 
 if(document.querySelector('.form--login')){
@@ -12,6 +13,13 @@ if(document.querySelector('.form--login')){
     const password = document.getElementById('password').value;
     login(email, password);
 })};
+
+if(document.querySelector('.forgotpass')){
+    document.querySelector('.forgotpass').addEventListener('submit', e =>{
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    forgotPass(email);
+})}
 
 if(document.querySelector('.form-user-data')){
     document.querySelector('.form-user-data').addEventListener('submit',e =>{

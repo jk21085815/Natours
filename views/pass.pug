@@ -1,0 +1,13 @@
+extends base
+
+
+block content 
+  main.main.forgotpass
+    .login-form
+      h2.heading-secondary.ma-bt-lg Please type your email
+      form.form
+        .form__group
+          label.form__label(for='email') Email address
+          input#email.form__input(type='email', placeholder='you@example.com', required)
+        .form__group
+          button.btn.btn--green.sendEmil Submit

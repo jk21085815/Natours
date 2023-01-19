@@ -1,10 +1,11 @@
 const express = require('express');
 const viewControler = require('./../controler/viewControler');
 const authControler = require('./../controler/authControler');
-const bookingControler = require('./../controler/bookingControler');
+// const bookingControler = require('./../controler/bookingControler');
 
 const router = express.Router();
 router.get('/singup', viewControler.singUp);
+router.get('/forgotPassword', viewControler.forgotPassword);
 
 
 router.get('/',
