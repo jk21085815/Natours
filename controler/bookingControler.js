@@ -9,7 +9,7 @@ const factory = require('./handelerFactory');
 exports.getChekOutSession =catchAsync( async(req, res, next) => {
     //1) get the cutrrently booked tour
     const tour = await Tour.findById(req.params.tourId);
-
+ 
 
     //2) create a check out session
     //session information
